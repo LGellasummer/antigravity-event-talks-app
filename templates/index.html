@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigQuery Release Notes Hub</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="header-content">
+                <div class="logo-area">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div>
+                        <h1>BigQuery</h1>
+                        <p class="subtitle">Release Notes Tracker</p>
+                    </div>
+                </div>
+                
+                <div class="actions-area">
+                    <button id="refresh-btn" class="btn btn-primary" title="Refresh Release Notes">
+                        <i class="fa-solid fa-arrows-rotate" id="refresh-icon"></i>
+                        <span>Refresh Feed</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-layout">
+            <!-- Feed Section -->
+            <section class="feed-section">
+                <div class="feed-header">
+                    <h2>Latest Updates</h2>
+                    <span id="notes-count" class="badge">0 Updates</span>
+                </div>
+                
+                <!-- Skeleton loader / Loading indicator -->
+                <div id="loading-container" class="loading-container hidden">
+                    <div class="spinner-large"></div>
+                    <p>Fetching latest BigQuery release notes...</p>
+                </div>
+
+                <!-- Error Container -->
+                <div id="error-container" class="error-container hidden">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p id="error-message">Failed to fetch release notes.</p>
+                    <button id="retry-btn" class="btn btn-secondary">Retry</button>
+                </div>
+
+                <!-- Notes list -->
+                <div id="notes-list" class="notes-list">
+                    <!-- Dynamic Notes will be inserted here -->
+                </div>
+            </section>
+
+            <!-- Tweet Composer / Selection Details sidebar -->
+            <aside class="sidebar-section">
+                <div class="glass-card tweet-composer-card sticky-sidebar">
+                    <h3>Tweet Composer</h3>
+                    
+                    <div id="no-selection-state" class="composer-state active">
+                        <div class="empty-composer-icon">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </div>
+                        <p>Select a release note from the list to compose and share an update.</p>
+                    </div>
+
+                    <div id="selection-state" class="composer-state hidden">
+                        <div class="selected-note-preview">
+                            <span class="preview-label">Selected Note:</span>
+                            <h4 id="preview-title"></h4>
+                            <span id="preview-date" class="preview-date"></span>
+                        </div>
+
+                        <div class="tweet-box-container">
+                            <label for="tweet-text">Compose Tweet</label>
+                            <textarea id="tweet-text" rows="6" maxlength="280" placeholder="What's happening?"></textarea>
+                            <div class="char-counter">
+                                <span id="char-used">0</span>/280
+                            </div>
+                        </div>
+
+                        <button id="tweet-btn" class="btn btn-tweet">
+                            <i class="fa-brands fa-x-twitter"></i>
+                            <span>Post on X</span>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <footer>
+            <p>BigQuery Release Notes Viewer &copy; 2026. Data sourced from Google Cloud RSS Feed.</p>
+        </footer>
+    </div>
+
+    <!-- Main JavaScript -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
