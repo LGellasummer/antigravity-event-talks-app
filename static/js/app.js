@@ -17,9 +17,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const tweetText = document.getElementById('tweet-text');
     const charUsed = document.getElementById('char-used');
     const tweetBtn = document.getElementById('tweet-btn');
+
+    // Theme Toggle Elements
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
     
     let releaseNotes = [];
     let selectedNote = null;
+
+    // Initialize Theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeIcon.className = 'fa-solid fa-moon';
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+        themeIcon.className = 'fa-solid fa-sun';
+    }
+
 
     // Fetch release notes from Flask API
     async function fetchReleaseNotes() {
@@ -221,7 +236,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return doc.body.textContent || "";
     }
 
+    // Toggle Theme function
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (currentTheme === 'light') {
+            document.documentElement.removeAttribute('data-theme');
+            themeIcon.className = 'fa-solid fa-sun';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeIcon.className = 'fa-solid fa-moon';
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
     // Event Listeners
+    themeToggle.addEventListener('click', toggleTheme);
     refreshBtn.addEventListener('click', fetchReleaseNotes);
     retryBtn.addEventListener('click', fetchReleaseNotes);
     tweetText.addEventListener('input', updateCharCount);
