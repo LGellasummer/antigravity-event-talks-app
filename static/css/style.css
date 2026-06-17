@@ -75,6 +75,29 @@
     color: #0f172a;
 }
 
+/* Theme Toggle Button Specific Styling */
+#theme-toggle {
+    background: #ffffff !important;
+    color: #0b0f19 !important; /* Dark Blue */
+    border: none !important;
+    transition: var(--transition-smooth);
+}
+
+#theme-toggle:hover {
+    background: #cbd5e1 !important;
+    transform: translateY(-2px);
+}
+
+[data-theme="light"] #theme-toggle {
+    background: #0b0f19 !important; /* Dark Blue */
+    color: #ffffff !important; /* White */
+}
+
+[data-theme="light"] #theme-toggle:hover {
+    background: #1e293b !important;
+}
+
+
 * {
     margin: 0;
     padding: 0;
